@@ -3,3 +3,21 @@
 ################################################################################
 
 /APIModel/bin
+/APIModel/obj
+/DataModel/bin
+/DataModel/obj
+/SmartPhone/SmartPhone/bin
+/SmartPhone/SmartPhone/obj
+/SmartPhone/SmartPhone.Android/bin
+/SmartPhone/SmartPhone.Android/obj
+/SmartPhone/SmartPhone.iOS/obj
+/SmartPhone/Web.APP/wwwroot/lib/bootstrap/dist
+/SmartPhone/Web.APP/wwwroot/lib/jquery/dist
+/SmartPhone/Web.APP/wwwroot/lib/jquery-validation/dist
+/SmartPhone/Web.Inventory/wwwroot/Images
+/Web.APP/bin
+/Web.APP/obj
+/Web.Inventory/bin
+/Web.Inventory/obj
+/Web.Inventory/wwwroot/Images/Products
+/.vs

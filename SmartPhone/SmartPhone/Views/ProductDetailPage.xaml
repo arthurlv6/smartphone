@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:SmartPhone.Behaviors"
+             x:Class="SmartPhone.Views.ProductDetailPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuItem1" Order="Primary" Icon="Microsoft.png" Text="Save" Priority="0" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+                <TableView Intent="Form" HasUnevenRows="True">
+                    <TableRoot>
+                        <TableSection Title="Prduct image">
+                            <ViewCell>
+                                <ContentView>
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Button Text="Camera" Clicked="TakePhoto_Clicked"></Button>
+                                            <Button Text="Pick" Clicked="PickupPhoto_Clicked"></Button>
+                                        </StackLayout>
+                                        <Image x:Name="FileImage" Source="{Binding Product.Profile}"  WidthRequest="400" HeightRequest="220"></Image>
+                                    </StackLayout>
+                                </ContentView>
+                            </ViewCell>
+                        </TableSection>
+                        <TableSection Title="Product Info">
+                            <EntryCell Label="Name" Text="{Binding Product.Name}" HorizontalTextAlignment="End"></EntryCell>
+                        <ViewCell>
+                            <ContentView>
+                                <StackLayout Orientation="Horizontal" Margin="15,10,10,10">
+                                    <Label Text="Price" VerticalOptions="Center" />
+                                    <Entry Text="{Binding Product.Price}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End">
+                                        <Entry.Behaviors>
+                                            <behaviors:NumericEntryBehavior />
+                                        </Entry.Behaviors>
+                                    </Entry>
+                                </StackLayout>
+                            </ContentView>
+                        </ViewCell>
+                            <EntryCell Label="SeriesNumber" Text="{Binding Product.SeriesNumber}" HorizontalTextAlignment="End">
+                            </EntryCell>
+                            <EntryCell Label="BarCode" Text="{Binding Product.BarCode}" HorizontalTextAlignment="End"></EntryCell>
+                            <EntryCell Label="ProductCode" Text="{Binding Product.ProductCode}" HorizontalTextAlignment="End"></EntryCell>
+                    </TableSection>
+                    <TableSection Title="Category">
+                        <ViewCell>
+                            <ContentView>
+                                <StackLayout Orientation="Horizontal" Margin="15,10,10,10">
+                                    <Picker x:Name="Category" HorizontalOptions="FillAndExpand" Title="Category" SelectedItem="{Binding Product.Category}">
+                                        <Picker.Items>
+                                            <x:String>ELECTRONICS</x:String>
+                                            <x:String>Clothing</x:String>
+                                            <x:String>Furnature</x:String>
+                                            <x:String>Skin Care</x:String>
+                                        </Picker.Items>
+                                    </Picker>
+                                </StackLayout>
+                            </ContentView>
+                        </ViewCell>
+                    </TableSection>
+
+
+                    <TableSection Title="Description">
+                            <ViewCell>
+                                <ContentView>
+                                    <Editor Text="{Binding Product.Description}">
+                                    <Editor.Triggers>
+                                        <Trigger TargetType="Editor" Property="IsFocused" Value="True">
+                                            <Setter Property="BackgroundColor" Value="#FFF9C4"></Setter>
+                                        </Trigger>
+                                    </Editor.Triggers>
+                                    </Editor>
+                                </ContentView>
+                            </ViewCell>
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                               IsVisible="{Binding IsBusy}"                             
+                                HorizontalOptions="CenterAndExpand" 
+                               VerticalOptions="CenterAndExpand" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

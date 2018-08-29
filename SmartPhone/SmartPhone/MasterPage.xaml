@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+			 x:Class="SmartPhone.MasterPage"
+			 Padding="0,0,0,0"
+			 Icon="hamburger.png"
+			 Title="Personal Organiser">
+    <Grid>
+        <Image Source="ground.png" Aspect="Fill" />
+        <StackLayout VerticalOptions="FillAndExpand" Padding="10,10,10,10">
+            <StackLayout Orientation="Horizontal">
+                <Image Aspect="AspectFit" WidthRequest="50" Source="header.png" Margin="10,0,0,0"/>
+                <Label Margin="10,0,0,0" FontSize="Large" Text="Karry Online" HorizontalOptions="Center" VerticalTextAlignment="Center"></Label>
+            </StackLayout>
+            <ListView x:Name="listView" VerticalOptions="FillAndExpand" SeparatorVisibility="None" Margin="0,0,0,10">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="3">
+                                <Image Aspect="AspectFit" WidthRequest="25" Source="{Binding IconSource}" />
+                                <Label Text="{Binding Title}" FontSize="20" TextColor="Black" VerticalOptions="CenterAndExpand"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </Grid>
+</ContentPage>

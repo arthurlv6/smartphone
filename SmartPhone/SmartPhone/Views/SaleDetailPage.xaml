@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartPhone.Views.SaleDetailPage"
+             Title="Order detail">
+
+    <ContentPage.Content>
+        <TableView Intent="Data" HasUnevenRows="True">
+            <TableView.Root>
+                <TableSection Title="Info">
+                    <ViewCell>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal" >
+                                <Label Text="Customer Name:"></Label>
+                                <Label HorizontalTextAlignment="End" Text="{Binding Sale.CustomerName}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Warehouse:"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.Warehouse}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="QuoteNumber:"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.QuoteNumber}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="TaxRate:"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.TaxRate}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="CreateDate:"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.CreateDate}"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+                <TableSection Title="Customer">
+                    <ViewCell>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="FirstName:"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.CustomerName}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="MobilePhone:"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.CustomerPhone}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Email:"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.CustomerEmail}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Address:"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.CustomerAddress}"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+                <TableSection Title="Shipment">
+                    <ViewCell>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Company:"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.SaleShipment.Company}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="TrackNumber:"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.SaleShipment.TrackNumber}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="DispatchDate:"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.SaleShipment.DispatchDate}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Price:"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.SaleShipment.Price}"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+                <TableSection Title="Products">
+                    <ViewCell>
+                        <ListView ItemsSource="{Binding Sale.ContractProduct}" RowHeight="80" HasUnevenRows="True">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Name}"></Label>
+                                            <Label Text="{Binding Price}"></Label>
+                                            <Label Text="*"></Label>
+                                            <Label Text="{Binding Quantity}"></Label>
+                                            <Label Text="="></Label>
+                                            <Label Text="{Binding TotalValue}"></Label>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ViewCell>
+                </TableSection>
+            </TableView.Root>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

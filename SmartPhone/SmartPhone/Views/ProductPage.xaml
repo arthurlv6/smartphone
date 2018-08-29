@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:smartphone.views.customizedcell;assembly=customizecell"
+             x:Class="SmartPhone.Views.ProductPage"
+             Title="Products"
+             x:Name="ProductList"
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuItem1" Order="Primary" Icon="Microsoft.png" Command="{Binding AddProductCommand}" Text="Add" Priority="0" />
+        <ToolbarItem Name="MenuItem1" Order="Primary" Icon="Microsoft.png" Command="{Binding ScanProductCommand}" Text="Scan" Priority="1" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+            <StackLayout>
+                <ListView ItemsSource="{Binding Products}" 
+                          Margin="5" 
+                          HasUnevenRows="True"
+                          IsPullToRefreshEnabled="True"
+                          IsRefreshing="{Binding IsBusy}"
+                          RefreshCommand="{Binding LoadItemsCommand}"
+                          x:Name="ProductsList">
+                    <ListView.Behaviors>
+                        <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}" />
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Command="{Binding Path=BindingContext.EditCommand, Source={x:Reference ProductList} }" CommandParameter="{Binding .}" Text="Edit" />
+                                    <MenuItem Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference ProductList} }" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
+                                </ViewCell.ContextActions>
+                                <ContentView>
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                        <Image Source="{Binding Profile}" Aspect="AspectFit" WidthRequest="50"></Image>
+                                            <StackLayout HorizontalOptions="FillAndExpand">
+                                                <Label Text="{Binding Name}" FontSize="Default" TextColor="DarkBlue">
+                                                </Label>
+                                                <StackLayout  Orientation="Horizontal">
+                                                    <Label VerticalOptions="Center" >Price:</Label>
+                                                <Label Text="{Binding Price, StringFormat='{0:C2}'}"  HorizontalOptions="FillAndExpand"></Label>
+                                                </StackLayout>
+                                                <StackLayout  Orientation="Horizontal">
+                                                    <Label VerticalOptions="Center" >OnHand:</Label>
+                                                    <Label Text="{Binding Quantity}"  HorizontalOptions="FillAndExpand"></Label>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <Button HeightRequest="40" WidthRequest="40" 
+                                                        Command="{Binding UpdownCommand}" 
+                                                        CommandParameter="{Binding .}" 
+                                                        Image="{Binding UpdownImage}"
+                                                        HorizontalOptions="Center" BackgroundColor="Transparent" BorderColor="Transparent"></Button>
+                                        </StackLayout>
+                                        <StackLayout Margin="55,0,0,20" IsVisible="{Binding ShowDetail}">
+                                            <StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label VerticalOptions="Center" >Ware house:</Label>
+                                                    <Label Text="{Binding Warehouse}"  HorizontalOptions="FillAndExpand"></Label>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label VerticalOptions="Center" >ProductCode:</Label>
+                                                    <Label Text="{Binding ProductCode}"  HorizontalOptions="FillAndExpand"></Label>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label VerticalOptions="Center" >SeriesNumber:</Label>
+                                                    <Label Text="{Binding SeriesNumber}"  HorizontalOptions="FillAndExpand"></Label>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label VerticalOptions="Center" >BarCode:</Label>
+                                                    <Label Text="{Binding BarCode}"  HorizontalOptions="FillAndExpand"></Label>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label VerticalOptions="Center" >Supplier:</Label>
+                                                    <Label Text="{Binding Supplier.Name}"  HorizontalOptions="FillAndExpand"></Label>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label VerticalOptions="Center" >Supplier Phone:</Label>
+                                                    <Button Command="{Binding CallSupplier}" CommandParameter="{Binding .}" Text="{Binding Supplier.ContactPhoneNumber}"  HorizontalOptions="FillAndExpand"></Button>
+                                                </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label VerticalOptions="Center" >Supplier Address:</Label>
+                                                <Label VerticalOptions="Center" Text="{Binding Supplier.PhysicalStreetAddress}"></Label>
+                                                <Button Command="{Binding SupplierAddressCommand}" CommandParameter="{Binding .}" Text="Map"  HorizontalOptions="FillAndExpand"></Button>
+                                            </StackLayout>
+                                            <Label>Description:</Label>
+                                                <Label Text="{Binding Description}" FontSize="Default"></Label>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ContentView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <Grid Padding="6" IsVisible="{Binding IsBusy}">
+                            <!-- set the footer to have a zero height when invisible -->
+                            <Grid.Triggers>
+                                <Trigger TargetType="Grid" Property="IsVisible" Value="False">
+                                    <Setter Property="HeightRequest" Value="0" />
+                                </Trigger>
+                            </Grid.Triggers>
+                            <!-- the loading content -->
+                            <Label Text="Loading..." TextColor="DeepPink" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                        </Grid>
+                    </ListView.Footer>
+                </ListView>
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

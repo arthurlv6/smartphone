@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartPhone.Views.AddSalePage"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             Title="Create a order">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuItem1" Order="Primary" Icon="Microsoft.png" Text="Save" Priority="0" Command="{Binding SaveSaleCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <TableView Intent="Data" HasUnevenRows="True" Margin="5">
+            <TableView.Root>
+                <TableSection Title="Info">
+                    <ViewCell>
+                        <StackLayout HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                                <Label Text="Customer Name:" VerticalOptions="Center"></Label>
+                                <Entry HorizontalTextAlignment="End" Text="{Binding Sale.CustomerName}" HorizontalOptions="FillAndExpand"></Entry>
+                                <Button Text="Choose" Command="{Binding SelectCustomerCommand}" HorizontalOptions="End" FontSize="Micro" WidthRequest="100" HeightRequest="15"></Button>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Warehouse:" VerticalOptions="Center"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.Warehouse}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="QuoteNumber:" VerticalOptions="Center"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.QuoteNumber}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="TaxRate:" VerticalOptions="Center"></Label>
+                                <Label HorizontalOptions="End" Text="{Binding Sale.TaxRate}"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="CreateDate:" VerticalOptions="Center"></Label>
+                                <DatePicker Date="{Binding Sale.CreateDate}" HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+                <TableSection Title="Shipment">
+                    <ViewCell>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Company:" VerticalOptions="Center"></Label>
+                                <Entry Text="{Binding Sale.DeliveryCompany}" HorizontalOptions="FillAndExpand"></Entry>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="TrackNumber:" VerticalOptions="Center"></Label>
+                                <Entry Text="{Binding Sale.TrackNumber}" HorizontalOptions="FillAndExpand"></Entry>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="DispatchDate:" VerticalOptions="Center"></Label>
+                                <DatePicker Date="{Binding Sale.DeliverDate}" HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Price:" VerticalOptions="Center"></Label>
+                                <Entry Text="{Binding Sale.DeliveryFee}" HorizontalOptions="FillAndExpand"></Entry>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+                <TableSection Title="Products">
+                    <ViewCell>
+                        <StackLayout>
+                            <Button Text="Choose Product" Command="{Binding SelectProductCommand}" FontSize="Micro"></Button>
+                            <ListView ItemsSource="{Binding SelectedProducts}" HasUnevenRows="True" x:Name="SelectedProductsListView" HeightRequest="100">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <ContentView>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <StackLayout>
+                                                        <Label Text="{Binding Name}" TextColor="DarkBlue">
+                                                        </Label>
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="{Binding Price}" FontSize="Micro"></Label>
+                                                            <Label Text="*" FontSize="Micro"></Label>
+                                                            <Label Text="{Binding Quantity}" FontSize="Micro"></Label>
+                                                            <Label Text="=" FontSize="Micro"></Label>
+                                                            <Label Text="{Binding Price}" FontSize="Micro"></Label>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </ContentView>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+            </TableView.Root>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

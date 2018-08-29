@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<CarouselPage  xmlns="http://xamarin.com/schemas/2014/forms" 
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+               x:Class="SmartPhone.Home"             
+               xmlns:converters="clr-namespace:SmartPhone.Converters"
+               xmlns:behaviors="clr-namespace:SmartPhone.Behaviors"
+               xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
+               xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"  >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SelectedItemEventArgsToSelectedItemConverter 
+                x:Key="SelectedItemConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage BackgroundImage="pageGround.png">
+        <ContentPage.ToolbarItems>
+            <ToolbarItem Name="MenuItem1" Order="Primary" Icon="Microsoft.png" Text="+" Priority="0" Command="{Binding AddSaleCommand}" />
+        </ContentPage.ToolbarItems>
+        <StackLayout Padding="10">
+            <SearchBar HeightRequest="40" TextColor="Black" Placeholder="Search" Text="{Binding SearchText}" SearchCommand="{Binding Search}"  Margin="0,0,0,0" VerticalOptions="Start"></SearchBar>
+            <ListView ItemsSource="{Binding Sales}" RowHeight="80" HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsBusy}"
+                      RefreshCommand="{Binding LoadItemsCommand}">
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior
+                    EventName="ItemSelected"
+                    Command="{Binding SaleItemSelectedCommand}"
+                    Converter="{StaticResource SelectedItemConverter}"/>
+                    <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}" />
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem CommandParameter="{Binding .}" Text="More" />
+                                <MenuItem CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
+                            </ViewCell.ContextActions>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout>
+                                    <Label Text="{Binding CustomerName}" TextColor="Black" FontSize="Medium" ></Label>
+                                    <Label Text="{Binding CreateDate}" TextColor="Black"></Label>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="EndAndExpand">
+                                    <Label Text="{Binding Price , StringFormat='{0:C2}'}" TextColor="DarkRed" FontSize="Large" HorizontalTextAlignment="End" ></Label>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Profit:"></Label>
+                                        <Label Text="{Binding Profit, StringFormat='{0:C2}'}" TextColor="DarkRed" HorizontalTextAlignment="End"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <Grid Padding="6" IsVisible="{Binding IsBusy}">
+                        <!-- set the footer to have a zero height when invisible -->
+                        <Grid.Triggers>
+                            <Trigger TargetType="Grid" Property="IsVisible" Value="False">
+                                <Setter Property="HeightRequest" Value="0" />
+                            </Trigger>
+                        </Grid.Triggers>
+                        <!-- the loading content -->
+                        <Label Text="Loading..." TextColor="DeepPink" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                    </Grid>
+                </ListView.Footer>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage BackgroundImage="pageGround.png">
+        <StackLayout Padding="10">
+            <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Padding="0,-40,0,0">
+                <Label Text="." FontSize="50" TextColor="Black" />
+                <Label Text="." FontSize="50" TextColor="Red" />
+                <Label Text="." FontSize="50" TextColor="Black"/>
+            </StackLayout>
+            <ScrollView>
+                <StackLayout Orientation="Vertical">
+
+                    <forms:ChartView x:Name="Chart1"  
+                               HeightRequest="150"/>
+                    <forms:ChartView x:Name="Chart2"  
+                               HeightRequest="150"  
+                             />
+                    <forms:ChartView x:Name="Chart3"  
+                             HeightRequest="150"/>
+                    <forms:ChartView x:Name="Chart4"  
+                             HeightRequest="150"/>
+                    <forms:ChartView x:Name="Chart5"  
+                             HeightRequest="150"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage BackgroundImage="pageGround.png">
+        <StackLayout Padding="10">
+            <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Padding="0,-40,0,0">
+                <Label Text="." FontSize="50" TextColor="Black" />
+                <Label Text="." FontSize="50" TextColor="Black"/>
+                <Label Text="." FontSize="50" TextColor="Red"/>
+            </StackLayout>
+            <ListView ItemsSource="{Binding Reports}" RowHeight="80" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Keyword}" TextColor="Blue" ></Label>
+                                <Label Text="{Binding ShortDescription}" Font="11" TextColor="Black"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+
+</CarouselPage >

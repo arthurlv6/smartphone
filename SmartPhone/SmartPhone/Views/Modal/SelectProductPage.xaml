@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartPhone.Views.Modal.SelectProductPage"
+             Title="Select your products">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuItem1" Order="Primary" Icon="Microsoft.png" Text="Ok" Priority="0" Clicked="ConfirmProductsClicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        
+        <StackLayout>
+            <Label Text="Selected products"></Label>
+            <ListView ItemsSource="{Binding SelectedProducts}"
+                  HasUnevenRows="True" x:Name="SelectedProductsListView" HeightRequest="100">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ContentView>
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout>
+                                        <Label Text="{Binding Name}" TextColor="DarkBlue">
+                                        </Label>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Price}" FontSize="Micro"></Label>
+                                            <Label Text="*" FontSize="Micro"></Label>
+                                            <Label Text="{Binding Quantity}" FontSize="Micro"></Label>
+                                            <Label Text="=" FontSize="Micro"></Label>
+                                            <Label Text="{Binding Price}" FontSize="Micro"></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ContentView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Total:"></Label>
+                <Label Text="{Binding Total}" x:Name="Total"></Label>
+            </StackLayout>
+            <StackLayout>
+                <SearchBar Placeholder="Entry your product name" x:Name="SearchProductBar" HeightRequest="30"></SearchBar>
+                <Button x:Name="Scan" Text="Scan" Clicked="ScanBarcode" ></Button>
+                <Label x:Name="ScanNoFoundMessage" TextColor="Blue"></Label>
+            </StackLayout>
+            <ListView ItemsSource="{Binding Products}"
+                  HasUnevenRows="True"
+                      x:Name="ProductsListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ContentView>
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                        <Image Source="{Binding Profile}" Aspect="AspectFit" WidthRequest="50"></Image>
+                                        <StackLayout HorizontalOptions="FillAndExpand">
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                <StackLayout HorizontalOptions="StartAndExpand">
+                                                    <Label Text="{Binding Name}" FontSize="Default" TextColor="DarkBlue">
+                                                    </Label>
+                                                    <Label Text="{Binding Price}"></Label>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                                    <Button Text="-" WidthRequest="30" HeightRequest="30" FontSize="Small" Clicked="DelClicked" CommandParameter="{Binding .}"></Button>
+                                                    <Button Text="+" WidthRequest="30" HeightRequest="30" FontSize="Small" Clicked="AddClicked" CommandParameter="{Binding .}"></Button>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <Label Text="{Binding Description}" FontSize="Micro"></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    
+                                </StackLayout>
+                            </ContentView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

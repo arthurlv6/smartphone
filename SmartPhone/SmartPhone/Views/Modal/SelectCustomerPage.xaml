@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartPhone.Views.Modal.SelectCustomerPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding Customers}"
+                  HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ContentView>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding Profile}" Aspect="AspectFit" WidthRequest="50"></Image>
+                                    <StackLayout>
+                                        <Label Text="{Binding FirstName}" FontSize="Default" TextColor="DarkBlue">
+                                        </Label>
+                                        <Label Text="{Binding MobilePhone}" FontSize="Micro"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ContentView>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
